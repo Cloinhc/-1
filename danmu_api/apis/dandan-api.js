@@ -838,8 +838,8 @@ export async function searchAnime(url, preferAnimeId = null, preferSource = null
         const expandPromises = [];
         for (const source of globals.sourceOrderArr) {
           if (!resultData[source]) continue;
-          // 在PLATFORM_ORDER模式下，跳过已满足平台的对应源
-          if (targetPlatform && !unsatisfiedPlatforms.has(source)) continue;
+          // 在PLATFORM_ORDER模式下，跳过已满足平台的对应源；unsatisfied为空时不跳过
+          if (targetPlatform && unsatisfiedPlatforms.size > 0 && !unsatisfiedPlatforms.has(source)) continue;
           // 源间并发、源内顺序，防止同源并发导致模块级缓存竞态
           expandPromises.push((async () => {
             const sourceResults = [];

@@ -88,8 +88,33 @@ export const HTML_TEMPLATE = /* html */ `
                     <p style="color: #666; font-size: 12px; margin-top: 5px;">* 设置将保存在浏览器本地存储中，清除网页的‘本地存储空间’或者输入框中留空并保存可恢复默认</p>
                 </div>
 
-                <p style="color: #666; margin-bottom: 20px;">当前生效的环境变量配置</p>
-                <div class="preview-area" id="preview-area"></div>
+                <p class="preview-description">当前生效的环境变量配置</p>
+                <div class="preview-toolbar">
+                    <nav class="preview-categories" id="preview-categories" aria-label="配置分类"></nav>
+                    <div class="preview-search">
+                        <input
+                            type="text"
+                            id="preview-search-input"
+                            placeholder="搜索键名、值或说明"
+                            aria-label="搜索配置"
+                            autocomplete="off"
+                            oninput="handlePreviewSearch(event)"
+                        >
+                        <button
+                            type="button"
+                            class="preview-search-clear"
+                            id="preview-search-clear"
+                            onclick="clearPreviewSearch()"
+                            title="清除搜索"
+                            aria-label="清除搜索"
+                            hidden
+                        >&times;</button>
+                    </div>
+                </div>
+                <div class="preview-status" id="preview-status" aria-live="polite"></div>
+                <div class="preview-area" id="preview-area" aria-live="polite">
+                    <p class="text-gray">正在加载配置...</p>
+                </div>
             </div>
 
             <!-- 日志查看 -->
@@ -285,14 +310,29 @@ export const HTML_TEMPLATE = /* html */ `
                 </div>
                 </div>
 
-                <div class="env-categories">
-                    <button class="category-btn active" onclick="switchCategory('api', event)">🔗 API配置</button>
-                    <button class="category-btn" onclick="switchCategory('source', event)">📜 源配置</button>
-                    <button class="category-btn" onclick="switchCategory('match', event)">🔍 匹配配置</button>
-                    <button class="category-btn" onclick="switchCategory('danmu', event)">🔣 弹幕配置</button>
-                    <button class="category-btn" onclick="switchCategory('cache', event)">💾 缓存配置</button>
-                    <button class="category-btn" onclick="switchCategory('system', event)">⚙️ 系统配置</button>
+                <div class="preview-toolbar env-config-toolbar">
+                    <nav class="preview-categories" id="env-categories" aria-label="系统配置分类"></nav>
+                    <div class="preview-search">
+                        <input
+                            type="text"
+                            id="env-search-input"
+                            placeholder="搜索键名、值或说明"
+                            aria-label="搜索系统配置"
+                            autocomplete="off"
+                            oninput="handleEnvSearch(event)"
+                        >
+                        <button
+                            type="button"
+                            class="preview-search-clear"
+                            id="env-search-clear"
+                            onclick="clearEnvSearch()"
+                            title="清除搜索"
+                            aria-label="清除搜索"
+                            hidden
+                        >&times;</button>
+                    </div>
                 </div>
+                <div class="preview-status" id="env-search-status" aria-live="polite"></div>
 
                 <div class="theme-settings" id="theme-settings" hidden>
                     <div class="theme-settings-copy">
