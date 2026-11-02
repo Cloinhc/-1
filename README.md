@@ -22,16 +22,6 @@ LogVar 弹幕 API 服务器
 
 本项目仅为个人学习爱好开发，代码开源。如有任何侵权行为，请联系本人删除。
 
-### 远程剧名映射表（默认关闭）
-
-远程映射表功能默认关闭，只有配置 `TITLE_MAPPING_TABLE_URL` 后才会启用。示例使用由 MoviePilot 共享识别词转换生成的映射表：
-
-```env
-TITLE_MAPPING_TABLE_URL=https://raw.githubusercontent.com/xlmc/danmu-mapping/main/Word/2026.txt
-```
-
-配置后 Node/Docker 首次使用会尝试下载，保存到 `.cache` 并在每天北京时间 05:30 后台更新，失败时保留旧缓存。Serverless 没有持久磁盘，冷启动后的首次标题匹配会同步下载远端映射，最长约等待 5 秒；下载成功后会在当前实例内存中复用，失败时继续使用本地映射。配置 `TITLE_MAPPING_TABLE_URL` 即表示接受这段冷启动等待。
-
 有问题提issue或 [私信机器人](https://t.me/ddjdd_bot) 都ok。
 
 新加了 [tg频道](https://t.me/logvar_danmu_channel) ，方便发送更新通知，以及群组，太多人私信咨询了，索性增加一个 [互助群](https://t.me/logvar_danmu_group) ，大家有问题可以在群里求助。

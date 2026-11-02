@@ -51,7 +51,9 @@ test('season extraction recognizes season markers', () => {
 
 test('common-util extractSeasonNumberFromAnimeTitle 尾部全零数字不识别为季号', () => {
   // 尾部「00」属于作品名的一部分（如「机动战士高达00」），parseInt 为 0 时不视为季号且保留完整标题
-  assert.deepStrictEqual(extractSeasonNumberFromAnimeTitle('机动战士高达00'), { season: null, baseTitle: '机动战士高达00' });
+  assert.deepStrictEqual(extractSeasonNumberFromAnimeTitle('机动战士高达00'), {
+    season: null, baseTitle: '机动战士高达00', fullTitle: '机动战士高达00',
+  });
   // 尾部多位数字（如「0079」）不构成 1-2 位季号，标题同样保持完整
   assert.strictEqual(extractSeasonNumberFromAnimeTitle('机动战士高达0079').season, null);
 });
